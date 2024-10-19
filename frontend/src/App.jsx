@@ -4,7 +4,7 @@ import Terminal from "./components/terminal";
 import FileTree from "./components/tree";
 import socket from "./socket";
 import AceEditor from "react-ace";
-
+import {Editor} from "@monaco-editor/react"
 import { getFileMode } from "./utils/getFileMode";
 
 function App() {
@@ -14,11 +14,16 @@ function App() {
   const [code, setCode] = useState("");
   const [terminalHeight, setTerminalHeight] = useState(200); // Terminal height state
   const [filesWidth, setFilesWidth] = useState(250); // File section width state
+  const [theme, setTheme] = useState("dark"); // Manage theme state
 
   const dragHandleRef = useRef(null);
   const terminalContainerRef = useRef(null);
 
   const isSaved = selectedFileContent === code;
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme); // Apply theme to root element
+  }, [theme]);
 
   useEffect(() => {
     if (!isSaved && code) {
@@ -101,6 +106,11 @@ function App() {
     document.addEventListener("mouseup", handleFilesMouseUp);
   };
 
+  // Theme toggle handler
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   return (
     <div className="playground-container">
       <div className="editor-container">
@@ -108,6 +118,7 @@ function App() {
           className="files"
           style={{ width: `${filesWidth}px` }} // Dynamic width for file section
         >
+          
           <FileTree
             onSelect={(path) => {
               setSelectedFileContent("");
@@ -126,15 +137,26 @@ function App() {
 
         <div className="editor">
           {selectedFile && (
-            <p>
+            <p >
               {selectedFile.replaceAll("/", " > ")}{" "}
-              {isSaved ? "Saved" : "Unsaved"}
+              <span className="save">{isSaved ? "Saved" : "Unsaved"}</span>
+              <button className="btn-theme" onClick={toggleTheme} style={{ alignSelf: 'flex-end'}}>
+              {theme === "light" ? "Switch to Dark Theme" : "Switch to Light Theme"}
+            </button>
             </p>
           )}
-          <AceEditor
+          {/* <AceEditor
             width="100%"
             mode={getFileMode({ selectedFile })}
-            theme="Atom Dark"
+            value={code}
+            
+            onChange={(e) => setCode(e)}
+          /> */}
+          <Editor
+            height={"100%"}
+            width={"100%"}
+            language={getFileMode({ selectedFile }) || "javascript"}  // Set language based on file type
+            theme={theme === "light" ? "vs-light" : "vs-dark"} // Switch theme based on state
             value={code}
             onChange={(e) => setCode(e)}
           />

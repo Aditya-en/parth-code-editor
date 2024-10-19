@@ -36,6 +36,14 @@
 .tree{
   margin-top: 10px;
 }
+.save{
+  margin-left: 20px;
+}
+.btn-theme{
+  float: inline-end;
+  font-size: xx-small;
+  padding-inline: 5px;
+}
 .item:hover{
   background-color: grey;
 }
