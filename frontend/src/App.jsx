@@ -195,9 +195,9 @@ const handleRun = (file) => {
   const extension = file.split(".").pop();
   switch (extension) {
     case "py":
-      return socket.emit("terminal:write", `python ${file}\n`);
+      return socket.emit("terminal:write", `python ./${file}\n`);
     case "js":
-      return socket.emit("terminal:write", `node ${file}\n`);
+      return socket.emit("terminal:write", `node ./${file}\n`);
     case "ts":
       return socket.emit("terminal:write", `tsc ${file} && node ${file}\n`);
     case "cpp":
