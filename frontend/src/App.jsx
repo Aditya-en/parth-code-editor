@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { MdFolder } from 'react-icons/md';
+import { FaFileCode } from 'react-icons/fa';
+import {createNewFile, createNewFolder} from "./utils/createNew"
 import "./App.css";
 import Terminal from "./components/terminal";
 import FileTree from "./components/tree";
 import socket from "./socket";
-import AceEditor from "react-ace";
 import {Editor} from "@monaco-editor/react"
 import { getFileMode } from "./utils/getFileMode";
 
@@ -117,7 +119,17 @@ function App() {
         <div
           className="files"
           style={{ width: `${filesWidth}px` }} // Dynamic width for file section
-        >
+        > 
+          <div className="new">
+            <p className="file" onClick={createNewFile}>
+              <FaFileCode size={15} />
+              file
+            </p>
+            <p className="folder" onClick={createNewFolder}>
+              <MdFolder size={15} />
+              folder
+            </p>
+          </div>
           
           <FileTree
             onSelect={(path) => {
@@ -137,21 +149,19 @@ function App() {
 
         <div className="editor">
           {selectedFile && (
-            <p >
-              {selectedFile.replaceAll("/", " > ")}{" "}
-              <span className="save">{isSaved ? "Saved" : "Unsaved"}</span>
-              <button className="btn-theme" onClick={toggleTheme} style={{ alignSelf: 'flex-end'}}>
-              {theme === "light" ? "Switch to Dark Theme" : "Switch to Light Theme"}
-            </button>
+            <p className="header">
+              <span className="file-name">{selectedFile.replaceAll("/", " > ")}{" "}</span>
+              <div className="btns">
+                <span className="save">{isSaved ? "Saved" : "Unsaved"}</span>
+                <button className="btn-run" onClick={()=>handleRun(selectedFile.split("/").pop())}>Run</button>
+                <button className="btn-theme" onClick={toggleTheme}>
+                  {theme === "light" ? "Switch to Dark Theme" : "Switch to Light Theme"}
+                </button>
+              </div>
             </p>
+
           )}
-          {/* <AceEditor
-            width="100%"
-            mode={getFileMode({ selectedFile })}
-            value={code}
-            
-            onChange={(e) => setCode(e)}
-          /> */}
+
           <Editor
             height={"100%"}
             width={"100%"}
@@ -160,6 +170,7 @@ function App() {
             value={code}
             onChange={(e) => setCode(e)}
           />
+
         </div>
       </div>
 
@@ -178,3 +189,24 @@ function App() {
 }
 
 export default App;
+
+const handleRun = (file) => {
+  const name = file.split(".")[0]
+  const extension = file.split(".").pop();
+  switch (extension) {
+    case "py":
+      return socket.emit("terminal:write", `python ${file}\n`);
+    case "js":
+      return socket.emit("terminal:write", `node ${file}\n`);
+    case "ts":
+      return socket.emit("terminal:write", `tsc ${file} && node ${file}\n`);
+    case "cpp":
+      return socket.emit("terminal:write", `g++ ${file} -o ${name}.out && ./${name}.out\n`);
+    case "go":
+      return socket.emit("terminal:write", `go build ${file} && ./${name}\n`);
+    case "rs":
+      return socket.emit("terminal:write", `rustc ${file} && ./${name}\n`);
+    default:
+      console.log("Unsupported file type");
+  }
+};

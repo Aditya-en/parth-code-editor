@@ -39,11 +39,12 @@
 .save{
   margin-left: 20px;
 }
-.btn-theme{
+/* .btn-theme{
   float: inline-end;
   font-size: xx-small;
   padding-inline: 5px;
-}
+} */
+
 .item:hover{
   background-color: grey;
 }
@@ -53,16 +54,87 @@
   overflow: auto; /* Scroll within the editor */
 }
 
-.file-node {
+/* .file-node {
+  display: flex;
   font-size: x-small;
+  gap: 10px;
   cursor: pointer;
   margin: 3px;
   border-radius: 5px;
+} */
+
+.file-node {
+  display: flex;
+  font-size: x-small;
+  gap: 10px;
+  cursor: pointer;
+  margin: 3px;
+  border-radius: 5px;
+  padding: 3px;
+  transition: background-color 0.2s ease; /* Smooth transition */
 }
+
+.file-node:hover, .dir:hover {
+  background-color: #333333; /* Dark grey */
+  color: #ffffff; /* Optional: change text color to white */
+}
+.new{
+  display: flex;
+  margin: 10px;
+  font-size: x-small;
+  justify-content: space-around;
+}
+.new > *{
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;  /* Distribute space between file name and buttons */
+  align-items: center;
+  padding: 10px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.file-name {
+  flex-shrink: 0; /* Prevent the file name from shrinking */
+  font-size: 14px;
+  margin-right: 20px; /* Add space between the file name and 'Saved/Unsaved' */
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  width: 100%;   /* Take full width */
+  justify-content: space-between; /* Create space between the elements inside */
+}
+
+.save {
+  margin-right: 20px; /* Add space between 'Saved/Unsaved' and 'Run' button */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.btn-run {
+  margin-right: auto; /* Push the 'Run' button to the middle */
+  margin-left: auto;  /* Center the 'Run' button */
+  padding-inline: 18px;
+  color: white;
+  background-color: rgb(0, 192, 0);
+  border-radius: 5px;
+  
+}
+
+.btn-theme {
+  white-space: nowrap; /* Prevent wrapping of text */
+  font-size: x-small;
+}
+
 .dir{
   font-size: small;
   margin: 3px;
 }
+
 
 /* Resizable terminal-container */
 .terminal-container {

@@ -47,10 +47,6 @@ ptyProcess.on('error', (error) => {
   console.error('pty process error:', error);
 });
 
-ptyProcess.onData(data => {
-  console.log(data);
-  io.emit('terminal:data', data);
-});
 
 io.on('connection', (socket) => {
   console.log(`Socket connected`, socket.id);
@@ -66,6 +62,11 @@ io.on('connection', (socket) => {
   });
 });
 
+ptyProcess.onData(data => {
+    console.log(data);
+    io.emit('terminal:data', data);
+  });
+  
 app.get('/files', async (req, res) => {
   const fileTree = await generateFileTree(userDir);
   return res.json({ tree: fileTree });

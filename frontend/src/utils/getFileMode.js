@@ -31,7 +31,7 @@ export const getFileMode = ({ selectedFile }) => {
     case "handlebars":
       return "handlebars";
     case "go":
-      return "golang";
+      return "go";
     case "cs":
       return "csharp";
     case "litcoffee":
