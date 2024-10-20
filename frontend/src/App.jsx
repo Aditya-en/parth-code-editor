@@ -123,11 +123,12 @@ function App() {
           <div className="new">
             <p className="file" onClick={createNewFile}>
               <FaFileCode size={15} />
-              file
+              {" "}file
             </p>
+            <span style={{width:"2px"}}  ></span>
             <p className="folder" onClick={createNewFolder}>
               <MdFolder size={15} />
-              folder
+              {" "}folder
             </p>
           </div>
           

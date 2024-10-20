@@ -83,9 +83,15 @@
   margin: 10px;
   font-size: x-small;
   justify-content: space-around;
+  border-bottom: 2px solid grey;
 }
 .new > *{
   cursor: pointer;
+}
+.new > span{
+  height: 30px;
+  overflow: hidden;
+  background-color: grey;
 }
 
 .header {
