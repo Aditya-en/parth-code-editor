@@ -1,0 +1,54 @@
+
+ h2 {
+    color: #1ec3ff; /* Light blue color for headings */
+    margin-bottom: 30px;
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid #1ec3ff; /* Light blue underline */
+    color: #fff; /* White text for input fields */
+    font-size: 16px;
+    outline: none;
+}
+
+.input-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #1ec3ff;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #1ec3ff;
+    font-size: 12px;
+}
+
+button.signup-btn {
+    background-color: #1ec3ff;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button.signup-btn:hover {
+    background-color: #18a3db; /* Darker shade of the blue on hover */
+}  
