@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'; // Assuming the CSS file is still used
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,15 +17,47 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your form submission logic here, like an API request
-    console.log(formData);
+    const navigate=useNavigate()
     
-    // Optional: Disable the button after form submission
-    const button = e.target.querySelector('button');
-    button.disabled = true;
-  };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault(); // Prevent the form from submitting the default way
+
+      // const email = document.getElementById('login-email').value;
+      // const password = document.getElementById('login-password').value;
+      const { password, email } = formData
+  
+      fetch('/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password })
+      })
+      
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          if (data.token) {
+              // Save the token (if needed)
+              localStorage.setItem('token', data.token);
+              // Redirect to the desired URL
+              window.location.href = data.redirect;
+          } else {
+              // Handle login errors
+              alert(data.msg); // Display the error message to the user
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.'); // Fallback error message
+      });
+    };
+    
 
   return (
     <div className="login-container">

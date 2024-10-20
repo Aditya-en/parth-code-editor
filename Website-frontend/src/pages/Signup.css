@@ -1,7 +1,5 @@
 
-
-
-h2 {
+ h2 {
     color: #1ec3ff; /* Light blue color for headings */
     margin-bottom: 30px;
 }
@@ -53,4 +51,4 @@ button.signup-btn {
 
 button.signup-btn:hover {
     background-color: #18a3db; /* Darker shade of the blue on hover */
-}
+}  

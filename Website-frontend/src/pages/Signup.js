@@ -3,6 +3,7 @@ import './Signup.css'; // Assuming your CSS is still needed
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -17,34 +18,31 @@ const SignUp = () => {
       [id]: value
     });
   };
-  const navigate = useNavigate();
+  const navigate=useNavigate()
+  
 
-  console.log(formData);
-  const { email, password, confirmPassword } = formData;
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your form handling logic here, such as sending data to the server
-    console.log(formData);
-    axios.post("http://localhost:3001/signup",{email,password,confirmPassword})
-    .then(result => {
-      if (result.status === 201) {
-          navigate("/login");
-      }
-  })
-  .catch(err => {
-      if (err.response && err.response.status === 400) {
-          window.alert("Email already exists. Please use a different email.");
-      } else {
-          console.log(err);
-      }
-  });
-};
+    // e.preventDefault();
+    const { email, password, confirmPassword } = formData;
+    console.log(formData)
+    // Ensure proper parentheses closing for axios.post
+    // axios.post("http://localhost:5000/signup", { email, password, confirmPassword })
+    //   .then(result => {
+    //     console.log(result);
+    //     // Navigate after a successful result
+    //     navigate("/login");
+    //   })
+    //   .catch(err => console.log(err));
 
+  };
+  
   return (
     <div className="login-container">
       <div className="login-box">
         <h2>Signup</h2>
-        <form id="signupForm" onSubmit={handleSubmit}>
+        <form id="signupForm" action="http://localhost:5000/signup"
+        method='POST'
+        onSubmit={handleSubmit}>
           <div className="input-box">
             <input
               type="email"
