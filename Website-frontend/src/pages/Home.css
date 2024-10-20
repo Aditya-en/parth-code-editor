@@ -1,0 +1,83 @@
+.body {
+    background-color: black;
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif; 
+
+    position: relative;
+  }
+.main-section {
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+    position: absolute;
+    top: 100px;
+    left:100px;
+}
+
+.main-section h2 {
+    font-size: 50px;
+    /* margin-bottom: 10px; */
+}
+
+.main-section p {
+    font-size: 18px;
+    /* margin-bottom: 30px; */
+    color: #bbb;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    text-decoration: none;
+}
+
+.buttons button {
+    background-color: #1ec3ff;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none; /* Ensure no underline */
+}
+
+.image{
+    width: 500px;
+    height: 500px;
+   
+    margin-top: 500px;
+}
+
+.features{
+    display: flex;
+    gap:100px;
+}
+
+.symbol{
+    width: 180px;
+    height: 180px;
+    background-color: black;
+}
+
+.lang-title{
+    font-size:40px;
+    margin-left: 100px;
+    color: #1ec3ff; /* Light blue color for the logo */
+    font-family: sans-serif;
+
+}
+.languages{
+    margin-top: 480px;
+}
+
+.language {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+    grid-template-rows: repeat(2, auto); /* 2 rows */
+    grid-row-gap: 70px;
+    grid-column-gap:200px; /* Space between the grid items */
+    padding: 20px;
+  }

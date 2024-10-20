@@ -1,0 +1,38 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a2236;
+    padding: 10px 10px;
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Change link color */
+}
+
+
+.name {
+    font-size: 35px;
+    color: #1ec3ff; /* Light blue color for the logo */
+    font-family: sans-serif;
+    margin-left: 25px;
+
+}
+
+.btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.build {
+    background-color: white;
+    color: black;
+}
